@@ -19,6 +19,12 @@ abstract public class EntityBuilder extends Builder {
         return this;
     }
 
+    public void examine() {
+        getEntity().setInteract(false);
+        getEntity().setRandom(true);
+        interact("Examine");
+    }
+
     public void interact() {
         done();
     }

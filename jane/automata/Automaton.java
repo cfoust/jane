@@ -40,9 +40,6 @@ public class Automaton implements Runnable {
     public Bank bank;
 
     @Inject
-    public World world;
-
-    @Inject
     public Inventory inventory;
 
     @Inject

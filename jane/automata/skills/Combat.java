@@ -48,62 +48,6 @@ public class Combat extends Automaton {
 
     NPC target;
 
-    boolean haveTarget() {
-        return target != null && target.getInteracting() == null;
-    }
-
-    void findTarget() {
-        List<NPC> npcs = world.getSortedNPCs(npcName);
-
-        if (npcs.size() == 0) {
-            logger.info("No NPC's in range");
-            return;
-        }
-
-        List<NPC> filtered = new ArrayList();
-        for (NPC npc : npcs) {
-            boolean isInteracting = npc.getInteracting() != null;
-
-            if (isInteracting ||
-                npc.getHealthRatio() != npc.getHealth()) {
-                continue;
-            }
-
-            filtered.add(npc);
-        }
-
-        if (filtered.size() == 0) {
-            logger.info("Couldn't find any targets");
-            target = null;
-            return;
-        }
-
-        target = filtered.get(0);
-    }
-
-    void attackTarget() {
-        if (!haveTarget()) return;
-
-        Polygon objectClickbox = target.getConvexHull();
-
-        int distance = getWorldLocation().distanceTo(target.getWorldLocation());
-
-        if (objectClickbox == null || distance > 5) {
-            net.***REMOVED***.api.Point loc = target.getMinimapLocation();
-
-            if (loc == null) {
-                target = null;
-                return;
-            }
-
-            input.click(loc.getX(), loc.getY());
-            return;
-        }
-
-        Rectangle bounds = objectClickbox.getBounds();
-        input.click(bounds);
-    }
-
     private boolean haveFood() {
         return getFood().length > 0;
     }
@@ -129,48 +73,5 @@ public class Combat extends Automaton {
 
     @Override
     public void run() {
-        machine.state(State.FINDING)
-            .base()
-            .enter(() -> {
-                if (!haveFood()) return;
-
-                findTarget();
-                attackTarget();
-                sleep().more();
-            })
-            .to(State.RETURNING).when(() -> moving.distanceTo(FIGHT) > 30)
-            .to(State.BANKING).when(() -> !haveFood())
-            .to(State.FIGHTING).when(() -> isInCombat());
-
-        machine.state(State.BANKING)
-            .enter(() -> {
-                if (moving.closeTo(BANK)) {
-                    bank.openBank();
-                    bank.depositEverything();
-                    sleep().some();
-                    bank.withdrawAll(ItemID.SHRIMPS);
-                    return;
-                }
-
-                go(BANK);
-                sleep().more();
-            })
-            .to(State.RETURNING).when(() -> haveFood());
-
-        machine.state(State.RETURNING)
-            .enter(() -> {
-                go(FIGHT);
-            })
-            .finish(State.FINDING);
-
-        machine.state(State.FIGHTING)
-            .enter(() -> {
-                sleep().some();
-
-                if (shouldEat()) eat();
-            })
-            .to(State.FINDING).when(() -> !isInCombat());
-
-        machine.start();
     }
 }
