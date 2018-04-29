@@ -161,6 +161,24 @@ public class Automaton implements Runnable {
         return clicker;
     }
 
+    public NPCEntityBuilder npc(int target) {
+        NPCEntityBuilder clicker = new NPCEntityBuilder(target);
+        inject(clicker);
+        return clicker;
+    }
+
+    public NPCEntityBuilder npc(int... targets) {
+        NPCEntityBuilder clicker = new NPCEntityBuilder(targets);
+        inject(clicker);
+        return clicker;
+    }
+
+    public NPCEntityBuilder npc(String target) {
+        NPCEntityBuilder clicker = new NPCEntityBuilder(target);
+        inject(clicker);
+        return clicker;
+    }
+
     //////////////////////////////////////////
 
     protected void sleepExact(long delay) {
