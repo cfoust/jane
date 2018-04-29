@@ -42,7 +42,8 @@ public class Keybinds implements KeyListener
             obj.setTarget(7409);
             obj.setRandom(false);
             obj.setInteract(true);
-            obj.setSearch(true);
+            obj.setSearch(false);
+            obj.setMenuVerb("Bank");
             plugin.getSupervisor().push(obj);
         } else if (e.getKeyCode() == KeyEvent.VK_F3) {
         } else if (e.getKeyCode() == KeyEvent.VK_F4) {

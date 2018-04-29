@@ -32,6 +32,9 @@ abstract public class Entity extends Automaton {
     // That just clicks on whatever the entity is.
     private boolean interact = true;
 
+    // Instead of just clicking on the entity, open its menu.
+    String menuVerb;
+
     public void setRandom(boolean random) {
         this.random = random;
     }
@@ -42,6 +45,10 @@ abstract public class Entity extends Automaton {
 
     public void setSearch(boolean search) {
         this.search = search;
+    }
+
+    public void setMenuVerb(String verb) {
+        this.menuVerb = verb;
     }
 
     public QueryRunner getQueryRunner() {
@@ -100,10 +107,6 @@ abstract public class Entity extends Automaton {
             return;
         }
 
-        for (Object candidate : candidates) {
-            logger.info("{} {}", yieldLocation(candidate), pathFinder.distanceTo(yieldLocation(candidate)));
-        }
-
         Object target = candidates.get(0);
 
         if (random) {
@@ -134,6 +137,16 @@ abstract public class Entity extends Automaton {
             sleep().more();
         }
 
+        if (menuVerb != null && menuVerb.length() > 0) {
+            while (!client.isMenuOpen()) {
+                mouse(yieldPolygon(target).getBounds()).right();
+            }
+
+            menu(menuVerb).done();
+            return;
+        }
+
+        // Otherwise we just click it indiscriminately.
         mouse(yieldPolygon(target).getBounds()).left();
     }
 }

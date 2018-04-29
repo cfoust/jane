@@ -148,6 +148,19 @@ public class Automaton implements Runnable {
         inject(clicker);
         return clicker;
     }
+
+    public ObjectEntityBuilder object(int target) {
+        ObjectEntityBuilder clicker = new ObjectEntityBuilder(target);
+        inject(clicker);
+        return clicker;
+    }
+
+    public ObjectEntityBuilder object(int... targets) {
+        ObjectEntityBuilder clicker = new ObjectEntityBuilder(targets);
+        inject(clicker);
+        return clicker;
+    }
+
     //////////////////////////////////////////
 
     protected void sleepExact(long delay) {

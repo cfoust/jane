@@ -4,18 +4,27 @@ import net.***REMOVED***.api.Point;
 
 import com.sqweebloid.jane.automata.Builder;
 
-public class EntityBuilder extends Builder {
-    //private Menu getMenu() {
-        //return (Menu) automaton;
-    //}
+abstract public class EntityBuilder extends Builder {
+    private Entity getEntity() {
+        return (Entity) automaton;
+    }
 
-    //public MenuBuilder(String verb) {
-        //automaton = new Menu();
-        //getMenu().setVerb(verb);
-    //}
+    public EntityBuilder closest() {
+        getEntity().setRandom(false);
+        return this;
+    }
 
-    //public void target(String target) {
-        //getMenu().setTarget(target);
-        //done();
-    //}
+    public EntityBuilder search() {
+        getEntity().setSearch(true);
+        return this;
+    }
+
+    public void interact() {
+        done();
+    }
+
+    public void interact(String verb) {
+        getEntity().setMenuVerb(verb);
+        done();
+    }
 }
