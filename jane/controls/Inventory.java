@@ -79,4 +79,15 @@ public class Inventory {
 
 		return queryRunner.runQuery(inventoryQuery);
     }
+
+    public String formatItem(Item item) {
+        return String.format("Item{id=%d, quantity=%d}", item.getId(), item.getQuantity());
+    }
+
+    public void dumpItems() {
+        System.out.println("Dumping items");
+        for (Item item : getItems()) {
+            System.out.println(formatItem(item));
+        }
+    }
 }

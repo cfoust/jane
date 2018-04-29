@@ -9,19 +9,21 @@ import net.***REMOVED***.client.input.KeyListener;
 import net.***REMOVED***.client.plugins.jane.JanePlugin;
 import com.sqweebloid.jane.automata.movement.MoveGraph;
 import com.sqweebloid.jane.automata.movement.Mover;
-import com.sqweebloid.jane.automata.Menu;
-import com.sqweebloid.jane.controls.Input;
+import com.sqweebloid.jane.automata.Entity;
+import net.***REMOVED***.api.Item;
+
+import com.sqweebloid.jane.controls.Inventory;
 
 public class Keybinds implements KeyListener
 {
-    @Inject
-    private Input input;
-
     @Inject
     private JanePlugin plugin;
 
     @Inject
     private Client client;
+
+    @Inject
+    private Inventory inventory;
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -35,14 +37,13 @@ public class Keybinds implements KeyListener
     public void keyReleased(KeyEvent e)
     {
         if (e.getKeyCode() == KeyEvent.VK_F1) {
-            input.dumpWidgets(true);
         } else if (e.getKeyCode() == KeyEvent.VK_F2) {
+            Entity obj = new Entity();
+            obj.setObject(7409);
+            obj.setRandom(true);
+            plugin.getSupervisor().push(obj);
         } else if (e.getKeyCode() == KeyEvent.VK_F3) {
-            Menu menu = new Menu();
-            menu.setVerb("Withdraw-All");
-            plugin.getSupervisor().push(menu);
         } else if (e.getKeyCode() == KeyEvent.VK_F4) {
-            plugin.getSupervisor().push(new Mover(MoveGraph.Node.GRAND_EXCHANGE));
         } else if (e.getKeyCode() == KeyEvent.VK_F5) {
         } else if (e.getKeyCode() == KeyEvent.VK_F6) {
         }
