@@ -313,6 +313,27 @@ public class PathFinder {
     }
 
     /**
+     * Allows for paths to the node's neighbors if there aren't
+     * any to the node directly.
+     */
+    public List<Node> findInexactPath(Node goal) {
+        List<Node> path = findPath(goal);
+
+        // We don't really care about getting to the EXACT point if it's
+        // a wall or game object, just near it. This checks to see if we
+        // can at least path to the neighbors.
+        if (path == null) {
+            for (Node neighbor : goal.getNeighbors()) {
+                path = findPath(neighbor);
+
+                if (path != null) break;
+            }
+        }
+
+        return path;
+    }
+
+    /**
      * Find a path to this world point if it's within the current region.
      */
     public List<WorldPoint> findPointPath(WorldPoint point) {
@@ -320,8 +341,7 @@ public class PathFinder {
         if (shouldRebuild()) buildGraph();
 
         Node goal = worldToNode(point);
-        List<Node> path = findPath(goal);
-
+        List<Node> path = findInexactPath(goal);
         if (path == null) return null;
 
         List<WorldPoint> pointPath = new ArrayList();
@@ -339,7 +359,8 @@ public class PathFinder {
         if (shouldRebuild()) buildGraph();
 
         Node goal = worldToNode(world);
-        List<Node> path = findPath(goal);
+
+        List<Node> path = findInexactPath(goal);
         if (path == null) return Integer.MAX_VALUE;
         return path.size();
     }

@@ -9,7 +9,7 @@ import net.***REMOVED***.client.input.KeyListener;
 import net.***REMOVED***.client.plugins.jane.JanePlugin;
 import com.sqweebloid.jane.automata.movement.MoveGraph;
 import com.sqweebloid.jane.automata.movement.Mover;
-import com.sqweebloid.jane.automata.Entity;
+import com.sqweebloid.jane.automata.ObjectEntity;
 import net.***REMOVED***.api.Item;
 
 import com.sqweebloid.jane.controls.Inventory;
@@ -38,9 +38,11 @@ public class Keybinds implements KeyListener
     {
         if (e.getKeyCode() == KeyEvent.VK_F1) {
         } else if (e.getKeyCode() == KeyEvent.VK_F2) {
-            Entity obj = new Entity();
-            obj.setObject(7409);
-            obj.setRandom(true);
+            ObjectEntity obj = new ObjectEntity();
+            obj.setTarget(7409);
+            obj.setRandom(false);
+            obj.setInteract(true);
+            obj.setSearch(true);
             plugin.getSupervisor().push(obj);
         } else if (e.getKeyCode() == KeyEvent.VK_F3) {
         } else if (e.getKeyCode() == KeyEvent.VK_F4) {

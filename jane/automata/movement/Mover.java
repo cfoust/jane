@@ -51,7 +51,7 @@ public class Mover extends Automaton {
         // Just use the A* pathfinder if we're in the
         // same region.
         if (startRegion == endRegion) {
-            logger.info("Path to %s is in region.\n", end);
+            logger.info("Path to {} is in region.", end);
             return pathFinder.findPointPath(end);
         }
 
@@ -95,11 +95,11 @@ public class Mover extends Automaton {
         List<WorldPoint> path = generatePath();
 
         if (path == null) {
-            logger.error("No path to destination %s\n", destination.toString());
+            logger.error("No path to destination {}", destination.toString());
             return;
         }
 
-        logger.info("Path to destination %s\n", destination.toString());
+        logger.info("Path to destination {}", destination.toString());
 
         index = 0;
 
@@ -115,11 +115,11 @@ public class Mover extends Automaton {
 
                 for (int i = index; i < path.size(); i++) {
                     WorldPoint next = path.get(i);
-                    if (moving.distanceTo(next) > 15) break;
+                    if (moving.distanceTo(next) > 12) break;
                     index = i;
                 }
 
-                logger.info("Index in path is %d/%d\n", index + 1, path.size());
+                logger.info("Index in path is {}/{}", index + 1, path.size());
 
                 clickPoint(path.get(index));
             })

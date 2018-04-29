@@ -96,7 +96,7 @@ public class StateMachine<T> {
             // Check all of the conditions
             T nextState = state.checkNext();
 
-            logger.info("NEXT -> %s\n", nextState);
+            logger.info("NEXT -> {}", nextState);
 
             if (nextState != rawState) {
                 state = states.get(nextState);
