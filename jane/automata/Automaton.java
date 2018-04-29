@@ -37,9 +37,6 @@ public class Automaton implements Runnable {
     public Moving moving;
 
     @Inject
-    public Bank bank;
-
-    @Inject
     public Inventory inventory;
 
     @Inject

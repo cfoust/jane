@@ -40,12 +40,6 @@ public class Bank {
         //Widget box = client.getWidget(WidgetInfo.DEPOSIT_BOX_INVENTORY_ITEMS_CONTAINER);
         //return box != null && !box.isHidden();
     //}
-
-    //public boolean isBoothOpen() {
-        //Widget box = client.getWidget(WidgetInfo.BANK_ITEM_CONTAINER);
-        //return box != null && !box.isHidden();
-    //}
-
     //public boolean isBankOpen() {
         //return isDepositBoxOpen() || isBoothOpen();
     //}

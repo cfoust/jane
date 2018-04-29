@@ -8,8 +8,9 @@ import java.util.List;
 import java.util.Map;
 import net.***REMOVED***.api.coords.WorldPoint;
 
-// This is so shitty. I know why the runtime is horrible, I just don't care.
-// Maybe come back and make this more efficient at some point, but it works.
+/**
+ * Yeah, yeah, I know, I don't like it either.
+ */
 public class MoveGraph {
     public static enum Node {
 

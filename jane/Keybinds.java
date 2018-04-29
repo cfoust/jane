@@ -9,6 +9,7 @@ import net.***REMOVED***.client.input.KeyListener;
 import net.***REMOVED***.client.plugins.jane.JanePlugin;
 import com.sqweebloid.jane.automata.movement.MoveGraph;
 import com.sqweebloid.jane.automata.movement.Mover;
+import com.sqweebloid.jane.automata.Banker;
 import com.sqweebloid.jane.automata.ObjectEntity;
 import net.***REMOVED***.api.Item;
 
@@ -37,14 +38,9 @@ public class Keybinds implements KeyListener
     public void keyReleased(KeyEvent e)
     {
         if (e.getKeyCode() == KeyEvent.VK_F1) {
-        } else if (e.getKeyCode() == KeyEvent.VK_F2) {
-            ObjectEntity obj = new ObjectEntity();
-            obj.setTarget(7409);
-            obj.setRandom(false);
-            obj.setInteract(true);
-            obj.setSearch(false);
-            obj.setMenuVerb("Bank");
+            Banker obj = new Banker();
             plugin.getSupervisor().push(obj);
+        } else if (e.getKeyCode() == KeyEvent.VK_F2) {
         } else if (e.getKeyCode() == KeyEvent.VK_F3) {
         } else if (e.getKeyCode() == KeyEvent.VK_F4) {
         } else if (e.getKeyCode() == KeyEvent.VK_F5) {
