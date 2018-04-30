@@ -1,6 +1,7 @@
 package com.sqweebloid.jane.automata;
 
 import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -136,6 +137,21 @@ public class Banker extends Automaton {
             return;
         }
 
-        mouse(bounds).left();
+        switch (amount) {
+            case 1:
+                mouse(bounds).left();
+                break;
+            case -1:
+                mouse(bounds).right();
+                menu(action + "-All").done();
+                break;
+            default:
+                mouse(bounds).right();
+                menu(action + "-X").done();
+                sleep().more();
+                type(String.valueOf(amount));
+                input.typeKey(KeyEvent.VK_ENTER);
+                break;
+        }
     }
 }

@@ -51,7 +51,7 @@ public class Keybinds implements KeyListener
             Banker obj = new Banker();
             obj.setSlot(0);
             obj.setInto(false);
-            obj.setAmount(1);
+            obj.setAmount(2);
             plugin.getSupervisor().push(obj);
         } else if (e.getKeyCode() == KeyEvent.VK_F5) {
         } else if (e.getKeyCode() == KeyEvent.VK_F6) {
