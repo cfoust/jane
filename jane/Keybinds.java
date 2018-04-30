@@ -39,10 +39,20 @@ public class Keybinds implements KeyListener
     {
         if (e.getKeyCode() == KeyEvent.VK_F1) {
             Banker obj = new Banker();
+            obj.setSlot(0);
+            obj.setInto(true);
+            obj.setAmount(1);
             plugin.getSupervisor().push(obj);
         } else if (e.getKeyCode() == KeyEvent.VK_F2) {
+            inventory.dumpItems();
         } else if (e.getKeyCode() == KeyEvent.VK_F3) {
+            inventory.dumpWidgets();
         } else if (e.getKeyCode() == KeyEvent.VK_F4) {
+            Banker obj = new Banker();
+            obj.setSlot(0);
+            obj.setInto(false);
+            obj.setAmount(1);
+            plugin.getSupervisor().push(obj);
         } else if (e.getKeyCode() == KeyEvent.VK_F5) {
         } else if (e.getKeyCode() == KeyEvent.VK_F6) {
         }
