@@ -11,6 +11,7 @@ import com.sqweebloid.jane.automata.movement.MoveGraph;
 import com.sqweebloid.jane.automata.movement.Mover;
 import com.sqweebloid.jane.automata.Banker;
 import com.sqweebloid.jane.automata.ObjectEntity;
+import com.sqweebloid.jane.automata.Test;
 import net.***REMOVED***.api.Item;
 
 import com.sqweebloid.jane.controls.Inventory;
@@ -38,22 +39,15 @@ public class Keybinds implements KeyListener
     public void keyReleased(KeyEvent e)
     {
         if (e.getKeyCode() == KeyEvent.VK_F1) {
-            Banker obj = new Banker();
-            obj.setSlot(0);
-            obj.setInto(true);
-            obj.setAmount(1);
-            plugin.getSupervisor().push(obj);
+            plugin.getSupervisor().push(new Test());
         } else if (e.getKeyCode() == KeyEvent.VK_F2) {
             inventory.dumpItems();
         } else if (e.getKeyCode() == KeyEvent.VK_F3) {
             inventory.dumpWidgets();
         } else if (e.getKeyCode() == KeyEvent.VK_F4) {
-            Banker obj = new Banker();
-            obj.setSlot(0);
-            obj.setInto(false);
-            obj.setAmount(2);
-            plugin.getSupervisor().push(obj);
+            plugin.getSupervisor().push(new Mover(MoveGraph.Node.DRAYNOR));
         } else if (e.getKeyCode() == KeyEvent.VK_F5) {
+            plugin.getSupervisor().push(new Mover(MoveGraph.Node.ALKARID_BANK));
         } else if (e.getKeyCode() == KeyEvent.VK_F6) {
         }
     }

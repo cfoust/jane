@@ -43,6 +43,8 @@ public class Banker extends Automaton {
     private static final String WITHDRAW = "Withdraw";
     private static final String DEPOSIT = "Deposit";
 
+    private boolean justOpen = false;
+
     private int slot;
 
     // Into or out from bank
@@ -61,6 +63,10 @@ public class Banker extends Automaton {
 
     public void setInto(boolean into) {
         this.into = into;
+    }
+
+    public void setJustOpen(boolean open) {
+        this.justOpen = open;
     }
 
     public void setAmount(int amount) {
@@ -101,6 +107,8 @@ public class Banker extends Automaton {
             object(BOOTH_ID).closest().interact("Bank");
             sleep().most();
         }
+
+        if (justOpen) return;
 
         String action = into ? DEPOSIT : WITHDRAW;
         Item[] slots = into ?

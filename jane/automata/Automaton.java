@@ -187,7 +187,17 @@ abstract public class Automaton implements Runnable {
         return clicker;
     }
 
-    //////////////////////////////////////////
+    public BankerBuilder bank(int slot) {
+        BankerBuilder banker = new BankerBuilder(slot);
+        inject(banker);
+        return banker;
+    }
+
+    public void bank() {
+        BankerBuilder banker = new BankerBuilder();
+        inject(banker);
+        banker.done();
+    }
 
     protected void sleepExact(long delay) {
         try { Thread.sleep(delay); } catch (Exception e) {}
@@ -197,15 +207,27 @@ abstract public class Automaton implements Runnable {
         sleepExact(base + (long) rand((int) variance));
     }
 
-    protected LocalPoint getLocalLocation() {
+    public boolean ensure(Loadout out) {
+        if (!out.ensure(this)) {
+            logger.error("Loadout could not be resolved. Exiting.");
+            machine.stop();
+            return false;
+        }
+
+        return true;
+    }
+
+    //////////////////////////////////////////
+
+    public LocalPoint getLocalLocation() {
         return client.getLocalPlayer().getLocalLocation();
     }
 
-    protected WorldPoint getWorldLocation() {
+    public WorldPoint getWorldLocation() {
         return client.getLocalPlayer().getWorldLocation();
     }
 
-    protected Player getPlayer() {
+    public Player getPlayer() {
         return client.getLocalPlayer();
     }
 }
