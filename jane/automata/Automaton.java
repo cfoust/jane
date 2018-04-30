@@ -1,6 +1,7 @@
 package com.sqweebloid.jane.automata;
 
 import java.awt.Rectangle;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.ThreadLocalRandom;
@@ -24,7 +25,7 @@ import com.sqweebloid.jane.controls.*;
  * Plans and performs a particular action in its own thread.
  * Can be paused.
  */
-public class Automaton implements Runnable {
+abstract public class Automaton implements Runnable {
 	protected Logger logger;
 
     @Inject
@@ -48,8 +49,9 @@ public class Automaton implements Runnable {
     @Inject
     public Push push;
 
-    protected StateMachine machine;
+    private Callable<Boolean> untilPredicate = null;
 
+    protected StateMachine machine;
     private ExecutorService executor;
 
     public Automaton() {
@@ -60,6 +62,19 @@ public class Automaton implements Runnable {
     public void setExecutor(ExecutorService executor) {
         this.executor = executor;
         machine = new StateMachine(executor);
+    }
+
+    /**
+     * If you provide this, the Automaton will run
+     * over and over until this predicate evaluates
+     * to true.
+     */
+    public void setUntil(Callable<Boolean> predicate) {
+        this.untilPredicate = predicate;
+    }
+
+    public Callable<Boolean> getUntil() {
+        return this.untilPredicate;
     }
 
     /**
@@ -90,8 +105,7 @@ public class Automaton implements Runnable {
      * This is the method that subclasses override to perform
      * their action.
      */
-    public void run() {
-    }
+    abstract public void run();
 
     //////////////////////////////////////////
     // QUASI-DSL FOR WRITING BOT FUNCTIONALITY

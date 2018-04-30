@@ -26,9 +26,11 @@ public class LevelUp extends Automaton {
 
     @Override
     public void run() {
+        Rectangle bound = new Rectangle(192, 448, 326 - 192, 455 - 448);
+
         for (int i = 0; i < 5; i++) {
             sleep().some();
-            input.click(new Rectangle(192, 448, 326 - 192, 455 - 448));
+            mouse(bound).left();
         }
     }
 }

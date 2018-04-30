@@ -4,6 +4,7 @@ import com.google.common.eventbus.Subscribe;
 import com.google.inject.Injector;
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import javax.inject.Singleton;
 import net.***REMOVED***.api.events.WidgetHiddenChanged;
@@ -35,7 +36,7 @@ public class Supervisor {
     private final long HOUR = 60 * MINUTE;
 
     private String getCurrentName() {
-        if (stack.peek() == null) return null;
+        if (stack.peek() == null) return "";
         return stack.peek().getClass().getSimpleName();
     }
 
@@ -57,7 +58,20 @@ public class Supervisor {
         // the automaton below it on the stack.
         (new Thread(() -> {
             String name = getCurrentName();
-            automaton.run();
+
+            Callable<Boolean> predicate = automaton.getUntil();
+
+            if (predicate == null) {
+                automaton.run();
+            } else {
+                try {
+                    while (!predicate.call()) automaton.run();
+                } catch (Exception e) {
+                    logger.error("There was an error executing the predicate.");
+                    e.printStackTrace();
+                }
+            }
+
             pop();
             onStopped(name);
         })).start();
@@ -120,18 +134,8 @@ public class Supervisor {
 
 	@Subscribe
 	public void hideWidgets(WidgetHiddenChanged event) {
-        //if (!getCurrentName().equals("LevelUp") && LevelUp.shouldTrigger(event.getWidget())) {
-            //push(new LevelUp());
-
-            //executor.submit(() -> {
-                //String text = "";
-
-                //if (text.length() == 0) {
-                    //text = "You leveled up.";
-                //}
-
-                //System.out.println(text);
-            //});
-        //}
+        if (!getCurrentName().equals("LevelUp") && LevelUp.shouldTrigger(event.getWidget())) {
+            push(new LevelUp());
+        }
     }
 }
