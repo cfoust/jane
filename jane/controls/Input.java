@@ -85,9 +85,17 @@ public class Input {
                     button == MouseEvent.BUTTON3));
     }
 
+    // Tighten up the bounds just a little bit
+    private static final double FUZZ_FACTOR = 0.3;
     public Point getPointInBounds(Rectangle r) {
-        return new Point((int) r.getX() + rand((int) r.getWidth()),
-                (int) r.getY() + rand((int) r.getHeight()));
+        int horizontal = (int) Math.floor(FUZZ_FACTOR * ((double) r.getWidth()));
+        int vertical = (int) Math.floor(FUZZ_FACTOR * ((double) r.getHeight()));
+
+        int x = (int) r.getX() + horizontal;
+        int y = (int) r.getY() + vertical;
+
+        return new Point(x + rand((int) r.getWidth() - horizontal),
+                y + rand((int) r.getHeight() - horizontal));
     }
 
     public void click(Rectangle r) {
