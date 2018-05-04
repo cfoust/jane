@@ -1,10 +1,14 @@
 package com.sqweebloid.jane.automata;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import lombok.Value;
 import net.***REMOVED***.api.Item;
 import net.***REMOVED***.api.coords.WorldPoint;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Defines what the player's inventory and equipment should look like.
@@ -14,6 +18,7 @@ import net.***REMOVED***.api.coords.WorldPoint;
  * The bot will just get stuck. Sorry.
  */
 public class Loadout {
+	private static final Logger logger = LoggerFactory.getLogger(Loadout.class);
     private static final int INVENTORY_SIZE = 28;
 
     private List<Predicate> predicates = new ArrayList();
@@ -74,6 +79,9 @@ public class Loadout {
         predicates.add(new Predicate(id, quantity, Quantifier.AT_LEAST));
     }
 
+    /**
+     * Have at LEAST this many free slots.
+     */
     public void hasFreeSpots(int quantity) {
         predicates.add(new Predicate(-1, quantity, Quantifier.AT_LEAST));
     }
@@ -90,6 +98,64 @@ public class Loadout {
         }
 
         return -1;
+    }
+
+    /**
+     * If there's a predicate involving free slots, bank
+     * everything necessary to make it satisfied.
+     */
+    private boolean ensureFreeSlots(Automaton automaton) {
+        // Construct a set of items that are otherwise already
+        // handled by the other predicates.
+        Set<Integer> ignore = new HashSet();
+        int desired = -1;
+
+        for (Predicate predicate : predicates) {
+            int id = predicate.getId();
+
+            if (id == -1) {
+                desired = predicate.getQuantity();
+                continue;
+            }
+
+            ignore.add(predicate.getId());
+        }
+
+        // There was never a clause that included free slots.
+        // Just carry on.
+        if (desired == -1) return true;
+
+        // First count the free spots remaining.
+        Item[] items = automaton.inventory.getInventoryItems();
+        int freeSlots = 28 - items.length;
+
+        for (Item item : items) {
+            if (item.getId() == -1) freeSlots++;
+        }
+
+        int discrepancy = desired - freeSlots;
+
+        // We have enough! We're ok.
+        if (discrepancy <= 0) return true;
+
+        // Go through and deposit any items we can.
+        for (int i = 0; i < items.length; i++) {
+            Item item = items[i];
+
+            if (item.getId() == -1) {
+                freeSlots++;
+                continue;
+            }
+
+            if (ignore.contains(item.getId())) continue;
+
+            automaton.bank(i).deposit(item.getQuantity());
+            desired--;
+
+            if (desired == 0) break;
+        }
+
+        return desired == 0;
     }
 
     /**
@@ -111,6 +177,8 @@ public class Loadout {
             int actual = predicate.getCount(items);
             int amount = required - actual;
 
+            if (id == -1) continue;
+
             // holy shit this is pretty
             switch (predicate.getQuantifier()) {
                 case AT_LEAST:
@@ -126,14 +194,17 @@ public class Loadout {
             }
 
             if (amount == 0) continue;
-            
+
             automaton.bank();
 
             int slot = (amount > 0) ?
                 getSlot(automaton.inventory.getBankItems(), id) :
                 getSlot(items, id);
 
-            if (slot == -1) return false;
+            if (slot == -1) {
+                logger.error("Could not find slot for item matching id {}", id);
+                return false;
+            }
 
             if (amount > 0) {
                 automaton.bank(slot).withdraw(amount);
@@ -141,6 +212,14 @@ public class Loadout {
                 automaton.bank(slot).deposit(amount);
             }
         }
+
+        // TODO: There's an edge case here that I don't feel like solving.
+        // If your free slots add up to more than you have after resolving
+        // the predicates, that probably means that there's an AT_LEAST
+        // clause that has a surplus. We could handle this, but it's probably
+        // not a big problem for now.
+
+        if (!ensureFreeSlots(automaton)) return false;
 
         // Go home.
         automaton.go(position);

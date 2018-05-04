@@ -7,6 +7,7 @@ public class Test extends Automaton {
         l.hasExactly(995, 2);
         l.hasExactly(555, 2);
         l.hasAtLeast(526, 1);
+        l.hasFreeSpots(25);
         ensure(l);
     }
 }

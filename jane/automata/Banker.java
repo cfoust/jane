@@ -134,7 +134,7 @@ public class Banker extends Automaton {
             .findFirst();
 
         if (!targetWidget.isPresent()) {
-            logger.error("Mismatch between slot and widgets");
+            logger.error("Mismatch between slot and widgets (id={} quantity={})", target.getId(), target.getQuantity());
             return;
         }
 
