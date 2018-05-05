@@ -100,6 +100,17 @@ public class Loadout {
         return -1;
     }
 
+    private int getFreeSlots(Automaton automaton) {
+        Item[] items = automaton.inventory.getInventoryItems();
+        int freeSlots = 28 - items.length;
+
+        for (Item item : items) {
+            if (item.getId() == -1) freeSlots++;
+        }
+
+        return freeSlots;
+    }
+
     /**
      * If there's a predicate involving free slots, bank
      * everything necessary to make it satisfied.
@@ -127,16 +138,12 @@ public class Loadout {
 
         // First count the free spots remaining.
         Item[] items = automaton.inventory.getInventoryItems();
-        int freeSlots = 28 - items.length;
+        int freeSlots = getFreeSlots(automaton);
 
-        for (Item item : items) {
-            if (item.getId() == -1) freeSlots++;
-        }
+        // Don't worry if we have at least one free slot
+        if (freeSlots >= 1) return true;
 
         int discrepancy = desired - freeSlots;
-
-        // We have enough! We're ok.
-        if (discrepancy <= 0) return true;
 
         // Go through and deposit any items we can.
         for (int i = 0; i < items.length; i++) {
@@ -149,8 +156,18 @@ public class Loadout {
 
             if (ignore.contains(item.getId())) continue;
 
-            automaton.bank(i).deposit(item.getQuantity());
-            desired--;
+            int quantity = item.getQuantity();
+
+            // Just deposit all for untracked items.
+            if (quantity == 1) {
+                int before = getFreeSlots(automaton);
+                automaton.bank(i).depositAll();
+                desired -= getFreeSlots(automaton) - before;
+                items = automaton.inventory.getInventoryItems();
+            } else {
+                automaton.bank(i).deposit(item.getQuantity());
+                desired--;
+            }
 
             if (desired == 0) break;
         }
@@ -169,6 +186,7 @@ public class Loadout {
 
         Item[] items = automaton.inventory.getInventoryItems();
 
+        boolean changed = false;
         for (Predicate predicate : predicates) {
             if (predicate.evaluate(items)) continue;
 
@@ -195,6 +213,7 @@ public class Loadout {
 
             if (amount == 0) continue;
 
+            changed = true;
             automaton.bank();
 
             int slot = (amount > 0) ?
@@ -222,7 +241,7 @@ public class Loadout {
         if (!ensureFreeSlots(automaton)) return false;
 
         // Go home.
-        automaton.go(position);
+        if (changed) automaton.go(position);
         return true;
     }
 }

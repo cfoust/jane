@@ -138,14 +138,22 @@ abstract public class Entity extends Automaton {
             int x = (int) bounds.getCenterX();
             int y = (int) bounds.getCenterY();
 
-            if (x > client.getViewportWidth() || y > client.getViewportHeight()) {
+            if (x > client.getViewportWidth() ||
+                y > client.getViewportHeight() ||
+                x < 0 ||
+                y < 0) {
                 targetPolygon = null;
             }
         }
 
-        if (search && (targetPolygon == null || distance > 8)) {
+        if (targetPolygon == null || distance > 8) {
             go(yieldLocation(target));
             sleep().more();
+        }
+
+        if (yieldPolygon(target) == null) {
+            run();
+            return;
         }
 
         // Click it indiscriminately if there's no menu item.
@@ -171,6 +179,8 @@ abstract public class Entity extends Automaton {
                 menu(menuVerb).done();
                 break;
             }
+
+            sleep().some();
         }
     }
 }

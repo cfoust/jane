@@ -24,13 +24,41 @@ public class LevelUp extends Automaton {
                 TO_GROUP(widget.getId()) == LEVEL_UP_GROUP_ID);
     }
 
+    public Widget getLevelUpWidget() {
+        return client.getWidget(WidgetInfo.LEVEL_UP_LEVEL);
+    }
+
+    public String getText() {
+        Widget levelUp = getLevelUpWidget();
+
+        if (levelUp == null) return null;
+        return levelUp.getText();
+    }
+
     @Override
     public void run() {
-        Rectangle bound = new Rectangle(192, 448, 326 - 192, 455 - 448);
+        String text = getText();
 
-        for (int i = 0; i < 5; i++) {
+        if (text != null) {
+            push.sendShot(text);
+        } else {
+            push.sendShot("You leveled up in something.");
+        }
+
+        // The main levelup widget
+        Widget levelUp = getLevelUpWidget();
+        while (shouldTrigger(levelUp)) {
             sleep().some();
-            mouse(bound).left();
+            mouse(new Rectangle(93, 435, 390, 17)).left();
+        }
+
+        sleep().more();
+
+        // The dialog widget that might say what you can do now
+        Widget dialog = client.getWidget(WidgetInfo.DIALOG_SPRITE);
+        while (!dialog.isHidden()) {
+            mouse(new Rectangle(116, 441, 380, 17)).left();
+            sleep().some();
         }
     }
 }
