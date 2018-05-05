@@ -29,6 +29,7 @@ public class NPCEntityBuilder extends EntityBuilder {
     }
 
     public void attack() {
+        getNPC().setFightable();
         interact("Attack");
     }
 

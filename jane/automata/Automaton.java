@@ -38,6 +38,9 @@ abstract public class Automaton implements Runnable {
     public Moving moving;
 
     @Inject
+    public MouseState mouseState;
+
+    @Inject
     public Inventory inventory;
 
     @Inject
@@ -115,6 +118,12 @@ abstract public class Automaton implements Runnable {
     //////////////////////////////////////////
     public MouseBuilder mouse(int x, int y) {
         MouseBuilder mouse = new MouseBuilder(new Point(x, y));
+        inject(mouse);
+        return mouse;
+    }
+
+    public MouseBuilder mouse() {
+        MouseBuilder mouse = new MouseBuilder(new Point(mouseState.getX(), mouseState.getY()));
         inject(mouse);
         return mouse;
     }

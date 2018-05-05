@@ -31,10 +31,26 @@ public class Menu extends Automaton {
         this.target = target;
     }
 
+    public boolean isTarget(MenuEntry entry) {
+        return entry.getOption().equals(verb) &&
+            (target.length() == 0 || Text.removeTags(entry.getTarget()).equals(target));
+    }
+
+    private void dumpEntries(List<MenuEntry> entries) {
+        for (MenuEntry entry : entries) {
+            logger.info("'{}' '{}'", entry.getOption(), Text.removeTags(entry.getTarget()));
+        }
+    }
+
     @Override
     public void run() {
         List<MenuEntry> entries = state.getEntries();
         bounds.clear();
+
+        if (entries.size() == 0) {
+            logger.info("Menu had no entries.");
+            return;
+        }
 
         final int BASE_HEIGHT = 18;
         final int LINE_HEIGHT = 15;
@@ -59,11 +75,14 @@ public class Menu extends Automaton {
             String entryVerb = entry.getOption();
             String entryTarget = Text.removeTags(entry.getTarget());
 
-            if (!entryVerb.equals(verb) || (target.length() > 0 && !entryTarget.equals(target))) {
+            if (!isTarget(entry)) {
                 continue;
             }
 
             mouse(bounds.get(i)).left();
+            return;
         }
+
+        mouse(client.getMenuX(), client.getMenuY() - 30).move();
     }
 }

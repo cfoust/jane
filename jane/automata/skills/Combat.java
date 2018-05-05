@@ -73,5 +73,19 @@ public class Combat extends Automaton {
 
     @Override
     public void run() {
+        machine.state(State.FINDING)
+            .base()
+            .enter(() -> {
+                npc(npcName).attack();
+            })
+            .to(State.FIGHTING).when(() -> isInCombat());
+
+        machine.state(State.FIGHTING)
+            .enter(() -> {
+                sleep().some();
+            })
+        .to(State.FINDING).when(() -> !isInCombat());
+
+        machine.start();
     }
 }

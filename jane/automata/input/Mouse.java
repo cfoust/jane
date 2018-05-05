@@ -113,8 +113,6 @@ public class Mouse extends Automaton {
             sleepExact((long) Math.ceil(interval));
         }
 
-        sleep().some();
-
         if (click) sendClick();
     }
 }

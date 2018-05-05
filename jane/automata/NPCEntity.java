@@ -13,6 +13,7 @@ import net.***REMOVED***.client.util.QueryRunner;
 public class NPCEntity extends Entity {
     private int[] targets = new int[0];
     private String nameTarget;
+    private boolean fightable = false;
 
     public void setTarget(int... ids) {
         targets = ids;
@@ -26,12 +27,22 @@ public class NPCEntity extends Entity {
         nameTarget = name;
     }
 
+    /**
+     * Determines whether this automaton should only
+     * look for NPC's that the player can fight. This just means
+     * they're not interacting with other players and their
+     * health is full.
+     */
+    public void setFightable() {
+        this.fightable = true;
+    }
+
     public WorldPoint yieldLocation(Object obj) {
         return ((NPC) obj).getWorldLocation();
     }
 
     public Polygon yieldPolygon(Object obj) {
-        return ((NPC) obj).getCanvasTilePoly();
+        return ((NPC) obj).getConvexHull();
     }
 
     public Object[] getCandidates() {
@@ -43,6 +54,13 @@ public class NPCEntity extends Entity {
             query.idEquals(targets);
         }
 
-        return getQueryRunner().runQuery(query);
+        NPC[] result = getQueryRunner().runQuery(query);
+
+        if (!fightable) return result;
+
+        return Arrays.stream(result)
+            .filter(npc -> npc.getInteracting() == null &&
+                    npc.getHealthRatio() == npc.getHealth())
+            .toArray();
     }
 }

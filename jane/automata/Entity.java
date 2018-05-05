@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.inject.Inject;
+import net.***REMOVED***.api.MenuEntry;
 import net.***REMOVED***.api.coords.WorldPoint;
 import net.***REMOVED***.client.util.QueryRunner;
 
@@ -31,6 +32,9 @@ abstract public class Entity extends Automaton {
     // This is different from calling npc(blah).interact().
     // That just clicks on whatever the entity is.
     private boolean interact = true;
+
+    @Inject
+    MenuState menuState;
 
     // Instead of just clicking on the entity, open its menu.
     String menuVerb;
@@ -88,29 +92,36 @@ abstract public class Entity extends Automaton {
             getWorldLocation().distanceTo(yieldLocation(other));
     }
 
+    public boolean isTarget(MenuEntry entry) {
+        return entry.getOption().equals(menuVerb);
+    }
+
     @Override
     public void run() {
         List<Object> candidates = Arrays.asList(getCandidates());
-
-        Collections.sort(candidates, (one, other) -> interact ?
-                comparePath(one, other) :
-                compare(one, other));
-
-        if (!search) {
-            candidates = candidates.stream()
-                .filter(item -> yieldPolygon(item) != null)
-                .collect(Collectors.toList());
-        }
 
         if (candidates.size() == 0) {
             logger.error("Found no candidates.");
             return;
         }
 
-        Object target = candidates.get(0);
+        Collections.sort(candidates, (one, other) -> compare(one, other));
 
-        if (random) {
-            target = candidates.get(rand(candidates.size()));
+        int index = 0;
+        Object target = null;
+        for (int i = 0; i < candidates.size(); i++) {
+            Object candidate = candidates.get(i);
+            WorldPoint location = yieldLocation(candidate);
+
+            if (pathFinder.findPointPath(location) != null) {
+                target = candidate;
+                break;
+            }
+        }
+
+        if (target == null) {
+            logger.error("Found no path to any candidates.");
+            return;
         }
 
         Polygon targetPolygon = yieldPolygon(target);
@@ -137,16 +148,29 @@ abstract public class Entity extends Automaton {
             sleep().more();
         }
 
-        if (menuVerb != null && menuVerb.length() > 0) {
-            while (!client.isMenuOpen()) {
-                mouse(yieldPolygon(target).getBounds()).right();
-            }
-
-            menu(menuVerb).done();
+        // Click it indiscriminately if there's no menu item.
+        if (menuVerb == null) {
+            mouse(yieldPolygon(target).getBounds()).left();
             return;
         }
 
-        // Otherwise we just click it indiscriminately.
-        mouse(yieldPolygon(target).getBounds()).left();
+        while (true) {
+            mouse(yieldPolygon(target).getBounds()).move();
+            List<MenuEntry> entries = menuState.getEntries();
+
+            // We can just click on the entity if doing so performs
+            // the action we're looking for.
+            if (entries.size() > 0 && isTarget(entries.get(0))) {
+                mouse().left();
+                break;
+            }
+
+            mouse(yieldPolygon(target).getBounds()).right();
+
+            if (client.isMenuOpen()) {
+                menu(menuVerb).done();
+                break;
+            }
+        }
     }
 }
