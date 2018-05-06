@@ -11,4 +11,3 @@ public class Test extends Automaton {
         ensure(l);
     }
 }
-
