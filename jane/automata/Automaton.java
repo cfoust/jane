@@ -208,6 +208,18 @@ abstract public class Automaton implements Runnable {
         banker.done();
     }
 
+    public void talk() {
+        DialogueBuilder chatty = new DialogueBuilder();
+        inject(chatty);
+        chatty.done();
+    }
+
+    public void choose(int option) {
+        ChoiceBuilder chooser = new ChoiceBuilder(option);
+        inject(chooser);
+        chooser.done();
+    }
+
     protected void sleepExact(long delay) {
         try { Thread.sleep(delay); } catch (Exception e) {}
     }
