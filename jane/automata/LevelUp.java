@@ -56,7 +56,7 @@ public class LevelUp extends Automaton {
 
         // The dialog widget that might say what you can do now
         Widget dialog = client.getWidget(WidgetInfo.DIALOG_SPRITE);
-        while (!dialog.isHidden()) {
+        while (dialog != null && !dialog.isHidden()) {
             mouse(new Rectangle(116, 441, 380, 17)).left();
             sleep().some();
         }

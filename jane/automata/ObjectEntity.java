@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import javax.inject.Inject;
 import net.***REMOVED***.api.GameObject;
+import net.***REMOVED***.api.Point;
 import net.***REMOVED***.api.coords.WorldPoint;
 import net.***REMOVED***.api.queries.GameObjectQuery;
 import net.***REMOVED***.client.util.QueryRunner;
@@ -26,7 +27,24 @@ public class ObjectEntity extends Entity {
      * which represents its location.
      */
     public WorldPoint yieldLocation(Object obj) {
-        return ((GameObject) obj).getWorldLocation();
+        GameObject gameObject = (GameObject) obj;
+
+        Point minRegion = gameObject.getRegionMinLocation();
+        Point maxRegion = gameObject.getRegionMaxLocation();
+        WorldPoint center = gameObject.getWorldLocation();
+
+        // The GameObject is only one tile wide.
+        if (minRegion == maxRegion) {
+            return center;
+        }
+
+        // TODO find the nearest unoccupied tile next to the game object
+        // The problem is that if the game object is too big (i.e occupies >= 9 tiles)
+        // the pathfinder can't find a path to it. We should just look for the nearest
+        // unoccupied tile and path to it.
+        WorldPoint minWorld = WorldPoint.fromRegion(client, minRegion.getX(), minRegion.getY(), center.getPlane());
+        WorldPoint maxWorld = WorldPoint.fromRegion(client, maxRegion.getX(), maxRegion.getY(), center.getPlane());
+        return minWorld;
     }
 
     /**

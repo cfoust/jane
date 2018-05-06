@@ -180,7 +180,7 @@ abstract public class Entity extends Automaton {
                 break;
             }
 
-            sleep().some();
+            sleep().more();
         }
     }
 }

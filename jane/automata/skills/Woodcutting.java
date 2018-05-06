@@ -20,7 +20,8 @@ import com.sqweebloid.jane.automata.Loadout;
  * Trains woodcutting.
  */
 public class Woodcutting extends Automaton {
-    private final int TREE_ID = 1276;
+    private final int TREE = 1276;
+    private final int OAK = 1751;
 
     private enum State {
         FINDING,
@@ -40,7 +41,7 @@ public class Woodcutting extends Automaton {
             .base()
             .enter(() -> {
                 ensure(gathering);
-                object(TREE_ID).interact();
+                object(OAK).interact();
             })
             .to(State.CUTTING).when(() -> isCutting());
 

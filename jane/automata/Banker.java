@@ -151,12 +151,14 @@ public class Banker extends Automaton {
                 break;
             case -1:
                 mouse(bounds).right();
+                sleep().more();
                 menu(action + "-All").done();
                 break;
             default:
                 mouse(bounds).right();
-                menu(action + "-X").done();
                 sleep().more();
+                menu(action + "-X").done();
+                sleep().most();
                 type(String.valueOf(amount));
                 input.typeKey(KeyEvent.VK_ENTER);
                 break;
