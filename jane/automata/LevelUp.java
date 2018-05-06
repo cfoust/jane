@@ -50,6 +50,7 @@ public class LevelUp extends Automaton {
         while (shouldTrigger(levelUp)) {
             sleep().some();
             mouse(new Rectangle(93, 435, 390, 17)).left();
+            sleep().some();
         }
 
         sleep().more();

@@ -162,7 +162,7 @@ public class Loadout {
             if (quantity == 1) {
                 int before = getFreeSlots(automaton);
                 automaton.bank(i).depositAll();
-                desired -= getFreeSlots(automaton) - before;
+                desired -= before - getFreeSlots(automaton);
                 items = automaton.inventory.getInventoryItems();
             } else {
                 automaton.bank(i).deposit(item.getQuantity());

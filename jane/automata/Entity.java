@@ -176,6 +176,7 @@ abstract public class Entity extends Automaton {
             mouse(yieldPolygon(target).getBounds()).right();
 
             if (client.isMenuOpen()) {
+                sleep().some();
                 menu(menuVerb).done();
                 break;
             }

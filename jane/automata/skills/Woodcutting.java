@@ -42,6 +42,7 @@ public class Woodcutting extends Automaton {
             .enter(() -> {
                 ensure(gathering);
                 object(OAK).interact();
+                sleep().some();
             })
             .to(State.CUTTING).when(() -> isCutting());
 

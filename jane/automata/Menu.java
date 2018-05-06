@@ -82,7 +82,5 @@ public class Menu extends Automaton {
             mouse(bounds.get(i)).left();
             return;
         }
-
-        mouse(client.getMenuX(), client.getMenuY() - 30).move();
     }
 }

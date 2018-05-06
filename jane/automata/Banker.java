@@ -151,7 +151,7 @@ public class Banker extends Automaton {
                 break;
             case -1:
                 mouse(bounds).right();
-                sleep().more();
+                sleep().most();
                 menu(action + "-All").done();
                 break;
             default:
