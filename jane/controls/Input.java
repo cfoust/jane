@@ -17,6 +17,8 @@ import net.***REMOVED***.api.widgets.Widget;
 import net.***REMOVED***.api.widgets.WidgetInfo;
 import net.***REMOVED***.client.ui.ClientUI;
 import net.***REMOVED***.client.util.Text;
+import static net.***REMOVED***.api.widgets.WidgetInfo.TO_GROUP;
+import static net.***REMOVED***.api.widgets.WidgetInfo.TO_CHILD;
 
 import net.***REMOVED***.client.plugins.jane.JanePlugin;
 
@@ -81,27 +83,58 @@ public class Input {
         doKey(keyCode, false);
     }
 
+    public List<Widget> getWidgets() {
+        List<Widget> widgets = new ArrayList();
+
+        for (int i = 0; i < 65536; i++) {
+            for (int j = 0; j < 1000; j++) {
+                Widget w = client.getWidget(i, j);
+
+                if (w == null) continue;
+                widgets.add(w);
+            }
+        }
+
+        return widgets;
+    }
+
+    public Widget getWidgetContaining(String match) {
+        for (Widget w : getWidgets()) {
+            String text = w.getText();
+            if (text == null || !text.contains(match)) continue;
+            return w;
+        }
+
+        return null;
+    }
+
+    public Widget getWidgetWithSprite(int id) {
+        for (Widget w : getWidgets()) {
+            int sprite = w.getSpriteId();
+            if (sprite != id) continue;
+            return w;
+        }
+
+        return null;
+    }
+
     public void dumpWidgets(boolean onlyVisible) {
         System.out.println("DUMPING WIDGETS");
 
         net.***REMOVED***.api.Point p = client.getMouseCanvasPosition();
 
         List<Widget> within = new ArrayList();
-        for (int i = 0; i < 65536; i++) {
-            for (int j = 0; j < 1000; j++) {
-                Widget w = client.getWidget(i, j);
+        for (Widget w : getWidgets()) {
+            if (w.isHidden() && onlyVisible) continue;
 
-                if (w == null || (w.isHidden() && onlyVisible)) continue;
-
-                Rectangle bounds = w.getBounds();
-                if (bounds != null && bounds.contains(p.getX(), p.getY())) {
-                    within.add(w);
-                }
-
-                //System.out.printf("%d %d -> %s\n", i, j, formatWidget(w));
-                recurseRootNode(i, j, w);
+            Rectangle bounds = w.getBounds();
+            if (bounds != null && bounds.contains(p.getX(), p.getY())) {
+                within.add(w);
             }
+
+            System.out.println(formatWidget(w));
         }
+
         System.out.println("DUMPED WIDGETS");
 
         if (within.size() > 0) {
@@ -113,48 +146,12 @@ public class Input {
         }
     }
 
-    private void recurseRootNode(int groupId, int childId, Widget w) {
-        printBlock();
-        String rootString = formatWidget(w);
-        System.out.printf("ROOT group=%d child=%d\n", groupId, childId);
-        System.out.println(rootString);
-        printBlock();
-
-        Widget[] children = w.getChildren();
-        if (children != null) {
-            for (Widget child : w.getChildren()) {
-                recurseNode(0, child);
-            }
-        }
-
-        printBlock();
-    }
-
-    public void recurseNode(int indent, Widget w) {
-        String base = "";
-
-        for (int i = 0; i < indent; i++) {
-            base += "----";
-        }
-
-        System.out.printf("%s%s\n", base, formatWidget(w));
-        Widget[] children = w.getChildren();
-
-        if (children != null) {
-            for (Widget child : w.getChildren()) {
-                recurseNode(indent + 1, child);
-            }
-        }
-    }
-
-    private void printBlock() {
-        System.out.println("=======================================");
-    }
-
     public String formatWidget(Widget w) {
         if (w == null) return null;
 
-        String widgetString = String.format("id=%d parentId=%d ", w.getId(), w.getParentId());
+        int group = TO_GROUP(w.getId());
+        int child = TO_CHILD(w.getId());
+        String widgetString = String.format("group=%d child=%d", group, child);
 
         Widget[] children = w.getChildren();
         if (children != null) {
