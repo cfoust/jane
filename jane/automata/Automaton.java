@@ -37,9 +37,6 @@ abstract public class Automaton implements Runnable {
     public Input input;
 
     @Inject
-    public Moving moving;
-
-    @Inject
     public MouseState mouseState;
 
     @Inject

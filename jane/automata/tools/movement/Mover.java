@@ -5,6 +5,8 @@ import java.util.List;
 import javax.inject.Inject;
 import net.***REMOVED***.api.Point;
 import net.***REMOVED***.api.coords.WorldPoint;
+import net.***REMOVED***.api.coords.LocalPoint;
+import net.***REMOVED***.api.Perspective;
 
 import com.sqweebloid.jane.automata.Automaton;
 
@@ -29,14 +31,23 @@ public class Mover extends Automaton {
         return client.getLocalPlayer().getWorldLocation();
     }
 
+    public int distanceTo(WorldPoint point) {
+        return currentLocation().distanceTo(point);
+    }
+
+    public Point getMinimapLocation(WorldPoint point) {
+        LocalPoint local = LocalPoint.fromWorld(client, point);
+        return Perspective.worldToMiniMap(client, local.getX(), local.getY());
+    }
+
     public void clickPoint(WorldPoint point) {
-        Point minimap = moving.getMinimapLocation(point);
+        Point minimap = getMinimapLocation(point);
         if (minimap == null) return;
         mouse(minimap.getX(), minimap.getY()).left();
     }
 
     public boolean isDone() {
-        return moving.closeTo(destination);
+        return destination.distanceTo(currentLocation()) < 5;
     }
 
     private int index = 0;
@@ -115,7 +126,7 @@ public class Mover extends Automaton {
 
                 for (int i = index; i < path.size(); i++) {
                     WorldPoint next = path.get(i);
-                    if (moving.distanceTo(next) > 12) break;
+                    if (distanceTo(next) > 12) break;
                     index = i;
                 }
 

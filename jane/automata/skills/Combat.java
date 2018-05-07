@@ -67,7 +67,7 @@ public class Combat extends Automaton {
         if (!haveFood()) return;
 
         WidgetItem[] food = getFood();
-        input.click(food[rand(food.length)].getCanvasBounds());
+        mouse(food[rand(food.length)].getCanvasBounds()).left();
     }
 
     @Override

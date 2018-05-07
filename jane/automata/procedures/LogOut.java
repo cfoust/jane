@@ -9,9 +9,9 @@ public class LogOut extends Automaton {
     @Override
     public void run() {
         while (!client.getGameState().equals(GameState.LOGIN_SCREEN)) {
-            input.click(new Rectangle(637, 475, 653 - 637, 494 - 475));
+            mouse(new Rectangle(637, 475, 653 - 637, 494 - 475)).left();
             sleep().more();
-            input.click(new Rectangle(577, 423, 706 - 577, 446 - 423));
+            mouse(new Rectangle(577, 423, 706 - 577, 446 - 423)).left();
             sleep().more();
         }
     }
