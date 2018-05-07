@@ -16,10 +16,12 @@ import org.slf4j.LoggerFactory;
 
 import com.sqweebloid.jane.Push;
 
-import net.***REMOVED***.client.plugins.jane.JanePlugin;
-import com.sqweebloid.jane.automata.input.*;
-import com.sqweebloid.jane.automata.movement.*;
+import com.sqweebloid.jane.automata.tools.*;
+import com.sqweebloid.jane.automata.tools.builders.*;
+import com.sqweebloid.jane.automata.tools.input.*;
+import com.sqweebloid.jane.automata.tools.movement.*;
 import com.sqweebloid.jane.controls.*;
+import net.***REMOVED***.client.plugins.jane.JanePlugin;
 
 /**
  * Plans and performs a particular action in its own thread.

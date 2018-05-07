@@ -10,7 +10,7 @@ import net.***REMOVED***.client.ui.overlay.Overlay;
 import net.***REMOVED***.client.ui.overlay.OverlayLayer;
 import net.***REMOVED***.client.ui.overlay.OverlayPosition;
 
-import com.sqweebloid.jane.automata.input.MouseState;
+import com.sqweebloid.jane.automata.tools.input.MouseState;
 
 public class MouseOverlay extends Overlay {
     @Inject

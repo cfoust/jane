@@ -12,6 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.sqweebloid.jane.automata.*;
+import com.sqweebloid.jane.automata.events.*;
+import com.sqweebloid.jane.automata.procedures.*;
 
 /**
  * Essentially the planner that controls

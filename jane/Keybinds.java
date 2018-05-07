@@ -13,16 +13,8 @@ import net.***REMOVED***.client.util.QueryRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.sqweebloid.jane.automata.Banker;
-import com.sqweebloid.jane.automata.ObjectEntity;
 import com.sqweebloid.jane.automata.Test;
-import com.sqweebloid.jane.automata.Dialogue;
-import com.sqweebloid.jane.automata.Choice;
-import com.sqweebloid.jane.automata.movement.MoveGraph;
-import com.sqweebloid.jane.automata.movement.Mover;
-import com.sqweebloid.jane.automata.skills.Woodcutting;
 import com.sqweebloid.jane.controls.Input;
-
 import com.sqweebloid.jane.controls.Inventory;
 
 public class Keybinds implements KeyListener
@@ -56,13 +48,10 @@ public class Keybinds implements KeyListener
     public void keyReleased(KeyEvent e)
     {
         if (e.getKeyCode() == KeyEvent.VK_F1) {
-            plugin.getSupervisor().push(new Woodcutting());
         } else if (e.getKeyCode() == KeyEvent.VK_F2) {
-            plugin.getSupervisor().push(new Dialogue());
+            int[] varps = client.getVarps();
+            logger.info("281: {}", varps[281]);
         } else if (e.getKeyCode() == KeyEvent.VK_F3) {
-            Choice choice = new Choice();
-            choice.setOption(1);
-            plugin.getSupervisor().push(choice);
         } else if (e.getKeyCode() == KeyEvent.VK_F4) {
         } else if (e.getKeyCode() == KeyEvent.VK_F5) {
             input.dumpWidgets(true);

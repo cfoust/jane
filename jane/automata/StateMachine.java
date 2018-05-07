@@ -51,7 +51,7 @@ public class StateMachine<T> {
         }
     }
 
-    protected void checkPause() {
+    public void checkPause() {
         synchronized (this) {
             try {
                 if (shouldPause) {

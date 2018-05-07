@@ -7,7 +7,7 @@ import net.***REMOVED***.api.Point;
 import net.***REMOVED***.api.coords.LocalPoint;
 import net.***REMOVED***.api.coords.WorldPoint;
 
-import com.sqweebloid.jane.automata.movement.MoveGraph;
+import com.sqweebloid.jane.automata.tools.movement.MoveGraph;
 import net.***REMOVED***.client.plugins.jane.JanePlugin;
 
 public class Moving {

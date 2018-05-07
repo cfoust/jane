@@ -17,9 +17,8 @@ import net.***REMOVED***.api.coords.LocalPoint;
 import net.***REMOVED***.api.queries.InventoryWidgetItemQuery;
 import net.***REMOVED***.api.widgets.WidgetItem;
 
-import net.***REMOVED***.client.plugins.jane.JanePlugin;
 import com.sqweebloid.jane.automata.Automaton;
-import com.sqweebloid.jane.automata.movement.MoveGraph;
+import com.sqweebloid.jane.automata.tools.movement.MoveGraph;
 import com.sqweebloid.jane.controls.Input;
 
 public class Combat extends Automaton {
