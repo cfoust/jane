@@ -12,4 +12,3 @@ public class ChoiceBuilder extends Builder {
         getChoice().setOption(option);
     }
 }
-

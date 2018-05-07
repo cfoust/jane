@@ -219,6 +219,18 @@ abstract public class Automaton implements Runnable {
         chooser.done();
     }
 
+    public InterfaceBuilder ui() {
+        InterfaceBuilder ui = new InterfaceBuilder();
+        inject(ui);
+        return ui;
+    }
+
+    public ItemUserBuilder use(int item) {
+        ItemUserBuilder user = new ItemUserBuilder(item);
+        inject(user);
+        return user;
+    }
+
     protected void sleepExact(long delay) {
         try { Thread.sleep(delay); } catch (Exception e) {}
     }

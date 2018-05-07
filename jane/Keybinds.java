@@ -48,12 +48,13 @@ public class Keybinds implements KeyListener
     public void keyReleased(KeyEvent e)
     {
         if (e.getKeyCode() == KeyEvent.VK_F1) {
+            plugin.getSupervisor().push(new Test());
         } else if (e.getKeyCode() == KeyEvent.VK_F2) {
             int[] varps = client.getVarps();
             logger.info("281: {}", varps[281]);
         } else if (e.getKeyCode() == KeyEvent.VK_F3) {
         } else if (e.getKeyCode() == KeyEvent.VK_F4) {
-        } else if (e.getKeyCode() == KeyEvent.VK_F5) {
+        } else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             input.dumpWidgets(true);
         } else if (e.getKeyCode() == KeyEvent.VK_F6) {
             // Hit this when you get a random.

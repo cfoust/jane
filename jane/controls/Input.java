@@ -47,7 +47,7 @@ public class Input {
     }
 
     // Tighten up the bounds just a little bit
-    private static final double FUZZ_FACTOR = 0.3;
+    private static final double FUZZ_FACTOR = 0.4;
     public Point getPointInBounds(Rectangle r) {
         int horizontal = (int) Math.floor(FUZZ_FACTOR * ((double) r.getWidth()));
         int vertical = (int) Math.floor(FUZZ_FACTOR * ((double) r.getHeight()));
@@ -151,7 +151,7 @@ public class Input {
 
         int group = TO_GROUP(w.getId());
         int child = TO_CHILD(w.getId());
-        String widgetString = String.format("group=%d child=%d", group, child);
+        String widgetString = String.format("group=%d child=%d ", group, child);
 
         Widget[] children = w.getChildren();
         if (children != null) {
@@ -167,6 +167,9 @@ public class Input {
         if (text != null) {
             widgetString += String.format("text=%s ", text);
         }
+
+        int sprite = w.getSpriteId();
+        widgetString += String.format("sprite=%d ", sprite);
 
         Rectangle bounds = w.getBounds();
         if (bounds != null) {
