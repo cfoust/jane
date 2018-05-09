@@ -177,6 +177,18 @@ abstract public class Automaton implements Runnable {
         return clicker;
     }
 
+    public WallEntityBuilder wall(int target) {
+        WallEntityBuilder waldo = new WallEntityBuilder(target);
+        inject(waldo);
+        return waldo;
+    }
+
+    public WallEntityBuilder wall(int... targets) {
+        WallEntityBuilder waldo = new WallEntityBuilder(targets);
+        inject(waldo);
+        return waldo;
+    }
+
     public NPCEntityBuilder npc(int target) {
         NPCEntityBuilder clicker = new NPCEntityBuilder(target);
         inject(clicker);

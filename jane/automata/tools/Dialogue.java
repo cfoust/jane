@@ -32,6 +32,10 @@ public class Dialogue extends Automaton {
         return client.getWidget(WidgetInfo.DIALOG_NPC_TEXT);
     }
 
+    private Widget getAnyContinue() {
+        return input.getWidgetContaining("Click here to continue");
+    }
+
     private Widget getPlayerContinue() {
         return client.getWidget(DIALOG_PLAYER_GROUP, DIALOG_PLAYER_CONTINUE);
     }
@@ -46,6 +50,10 @@ public class Dialogue extends Automaton {
 
     private boolean NPCIsVisible() {
         return isVisible(getNPCWidget());
+    }
+
+    private boolean anyIsVisible() {
+        return isVisible(getAnyContinue());
     }
 
     private String getPlayerText() {
@@ -67,7 +75,17 @@ public class Dialogue extends Automaton {
 
     @Override
     public void run() {
-        while (NPCIsVisible() || playerIsVisible()) {
+        while (NPCIsVisible() || playerIsVisible() || anyIsVisible()) {
+            if (anyIsVisible()) {
+                sleep().most();
+
+                Widget continued = getAnyContinue();
+                if (continued == null) continue;
+
+                mouse(continued.getBounds()).left();
+                continue;
+            }
+
             String text = NPCIsVisible() ? getNPCText() : getPlayerText();
             read(text);
 

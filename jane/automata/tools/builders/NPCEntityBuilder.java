@@ -25,9 +25,7 @@ public class NPCEntityBuilder extends EntityBuilder {
     }
 
     public void talk() {
-        getEntity().setMenuVerb("Talk-to");
-        getEntity().talk();
-        done();
+        interact("Talk-to");
     }
 
     public void attack() {

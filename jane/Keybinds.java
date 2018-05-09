@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.sqweebloid.jane.automata.Test;
+import com.sqweebloid.jane.automata.quests.TutorialIsland;
 import com.sqweebloid.jane.controls.Input;
 import com.sqweebloid.jane.controls.Inventory;
 
@@ -48,7 +49,7 @@ public class Keybinds implements KeyListener
     public void keyReleased(KeyEvent e)
     {
         if (e.getKeyCode() == KeyEvent.VK_F1) {
-            plugin.getSupervisor().push(new Test());
+            plugin.getSupervisor().push(new TutorialIsland());
         } else if (e.getKeyCode() == KeyEvent.VK_F2) {
             int[] varps = client.getVarps();
             logger.info("281: {}", varps[281]);

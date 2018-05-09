@@ -15,6 +15,10 @@ public class StateMachine<T> {
     private Map<T, State<T>> states = new HashMap();
     private T currentState;
 
+    // So that you can use a function to determine the
+    // next state rather than having to do it conditionally.
+    private Callable<T> stateChooser = null;
+
     private ExecutorService executor;
 
     public StateMachine(ExecutorService executor) {
@@ -30,6 +34,10 @@ public class StateMachine<T> {
     private boolean shouldPause = false;
     private boolean paused = false;
     private boolean shouldStop = false;
+
+    public void setStateChooser(Callable<T> determiner) {
+        stateChooser = determiner;
+    }
 
     public void stop() {
         shouldStop = true;
@@ -63,21 +71,36 @@ public class StateMachine<T> {
         }
     }
 
+    public T runStateChooser() {
+        try {
+            return stateChooser.call();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     public void start() {
         T rawState = null;
         State<T> state = null;
 
-        for (Map.Entry<T, State<T>> pair : states.entrySet()) {
-            State<T> pairState = pair.getValue();
+        if (stateChooser == null) {
+            for (Map.Entry<T, State<T>> pair : states.entrySet()) {
+                State<T> pairState = pair.getValue();
 
-            if (!pairState.isStart()) continue;
+                if (!pairState.isStart()) continue;
 
-            rawState = pair.getKey();
-            state = pairState;
-        }
+                rawState = pair.getKey();
+                state = pairState;
+            }
 
-        if (state == null) {
-            logger.error("It looks like you never defined a base state. Returning.");
+            if (state == null) {
+                logger.error("It looks like you never defined a base state. Returning.");
+            }
+        } else {
+            rawState = runStateChooser();
+            state = states.get(rawState);
         }
 
         if (state.hasOnEnter()) {
@@ -93,8 +116,8 @@ public class StateMachine<T> {
 
             checkPause();
 
-            // Check all of the conditions
-            T nextState = state.checkNext();
+            // Check a condition or just the state chooser.
+            T nextState = (stateChooser == null) ? state.checkNext() : runStateChooser();
 
             logger.info("NEXT -> {}", nextState);
 
