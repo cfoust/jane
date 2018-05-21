@@ -1,5 +1,7 @@
 # jane
 
+![example](assets/example.mp4)
+
 > Gather resources. Level up. Do quests.
 
 ## about
