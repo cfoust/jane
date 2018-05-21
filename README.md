@@ -1,6 +1,6 @@
 # jane
 
-![example](assets/example.mp4)
+![example](assets/example.gif)
 
 > Gather resources. Level up. Do quests.
 
