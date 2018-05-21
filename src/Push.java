@@ -37,8 +37,8 @@ public class Push {
 	public static final File SCREENSHOT = new File(
             SCREENSHOT_DIR, "screencap.png");
 
-    public static final String TOKEN = "***REMOVED***";
-    public static final String USER = "***REMOVED***";
+    public static final String TOKEN = "**REMOVED**";
+    public static final String USER = "**REMOVED**";
     public static final String FILE_NAME = "push_shot";
 
     private boolean shouldSend = false;
