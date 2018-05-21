@@ -12,9 +12,34 @@ import com.sqweebloid.jane.automata.Automaton;
  * Does all of Tutorial Island, probably.
  */
 public class TutorialIsland extends Automaton {
+    public void makeCharacter() {
+        mouse(input.getWidgetContaining("Female").getBounds()).left();
+
+        for (Widget widget : input.getWidgets()) {
+            if (TO_GROUP(widget.getId()) != 269) continue;
+            Rectangle bounds = widget.getBounds();
+
+            if (bounds.getWidth() != 45 || bounds.getHeight() != 36) continue;
+
+            for (int i = 0; i < rand(5); i++) {
+                mouse(bounds).left();
+            }
+        }
+
+        mouse(input.getWidgetContaining("Accept").getBounds()).left();
+    }
+
     @Override
     public void run() {
         machine.setStateChooser(() -> client.getVarps()[281]);
+
+        //machine
+            //.state(0)
+            //.enter(
+                //_if(() -> true).then(() -> makeCharacter()),
+                //npc(3308).talk(),
+                //sleep().more(),
+                //ui().options());
 
         // Make your character.
         machine.state(0)
@@ -24,22 +49,8 @@ public class TutorialIsland extends Automaton {
                 // Those that are 45x36 are the appearance buttons
                 // Look for the button that says "female"
                 Widget creation = input.getWidgetContaining("Welcome to RuneScape");
-
                 if (creation != null && !creation.isHidden()) {
-                    mouse(input.getWidgetContaining("Female").getBounds()).left();
-
-                    for (Widget widget : input.getWidgets()) {
-                        if (TO_GROUP(widget.getId()) != 269) continue;
-                        Rectangle bounds = widget.getBounds();
-
-                        if (bounds.getWidth() != 45 || bounds.getHeight() != 36) continue;
-
-                        for (int i = 0; i < rand(5); i++) {
-                            mouse(bounds).left();
-                        }
-                    }
-
-                    mouse(input.getWidgetContaining("Accept").getBounds()).left();
+                    makeCharacter();
                 }
 
                 // You have to click the guide 3308 to start.
