@@ -3,8 +3,8 @@ package com.sqweebloid.jane.automata.tools.input;
 import java.awt.Component;
 import java.awt.event.KeyEvent;
 import javax.inject.Inject;
-import net.***REMOVED***.api.Client;
-import net.***REMOVED***.client.ui.ClientUI;
+import org.someclient.api.Client;
+import org.someclient.client.ui.ClientUI;
 
 import com.sqweebloid.jane.automata.Automaton;
 import com.sqweebloid.jane.Utils;

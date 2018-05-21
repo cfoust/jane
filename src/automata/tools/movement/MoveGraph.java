@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import net.***REMOVED***.api.coords.WorldPoint;
+import org.someclient.api.coords.WorldPoint;
 
 /**
  * Yeah, yeah, I know, I don't like it either.

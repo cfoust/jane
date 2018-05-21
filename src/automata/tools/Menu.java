@@ -5,9 +5,9 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
-import net.***REMOVED***.api.MenuEntry;
-import net.***REMOVED***.api.Point;
-import net.***REMOVED***.client.util.Text;
+import org.someclient.api.MenuEntry;
+import org.someclient.api.Point;
+import org.someclient.client.util.Text;
 
 import com.sqweebloid.jane.automata.Automaton;
 

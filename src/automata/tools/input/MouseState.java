@@ -1,7 +1,7 @@
 package com.sqweebloid.jane.automata.tools.input;
 
 import javax.inject.Singleton;
-import net.***REMOVED***.api.Point;
+import org.someclient.api.Point;
 
 /**
  * Stores the location of the mouse.

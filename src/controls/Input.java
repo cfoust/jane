@@ -9,18 +9,18 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import net.***REMOVED***.api.Client;
-import net.***REMOVED***.api.MenuEntry;
-import net.***REMOVED***.api.Point;
-import net.***REMOVED***.api.events.MenuOpened;
-import net.***REMOVED***.api.widgets.Widget;
-import net.***REMOVED***.api.widgets.WidgetInfo;
-import net.***REMOVED***.client.ui.ClientUI;
-import net.***REMOVED***.client.util.Text;
-import static net.***REMOVED***.api.widgets.WidgetInfo.TO_GROUP;
-import static net.***REMOVED***.api.widgets.WidgetInfo.TO_CHILD;
+import org.someclient.api.Client;
+import org.someclient.api.MenuEntry;
+import org.someclient.api.Point;
+import org.someclient.api.events.MenuOpened;
+import org.someclient.api.widgets.Widget;
+import org.someclient.api.widgets.WidgetInfo;
+import org.someclient.client.ui.ClientUI;
+import org.someclient.client.util.Text;
+import static org.someclient.api.widgets.WidgetInfo.TO_GROUP;
+import static org.someclient.api.widgets.WidgetInfo.TO_CHILD;
 
-import net.***REMOVED***.client.plugins.jane.JanePlugin;
+import org.someclient.client.plugins.jane.JanePlugin;
 
 /**
  * Performs everything related to raw user input like clicks and
@@ -121,7 +121,7 @@ public class Input {
     public void dumpWidgets(boolean onlyVisible) {
         System.out.println("DUMPING WIDGETS");
 
-        net.***REMOVED***.api.Point p = client.getMouseCanvasPosition();
+        org.someclient.api.Point p = client.getMouseCanvasPosition();
 
         List<Widget> within = new ArrayList();
         for (Widget w : getWidgets()) {

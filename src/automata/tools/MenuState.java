@@ -3,8 +3,8 @@ package com.sqweebloid.jane.automata.tools;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Singleton;
-import net.***REMOVED***.api.MenuEntry;
-import net.***REMOVED***.api.events.MenuOpened;
+import org.someclient.api.MenuEntry;
+import org.someclient.api.events.MenuOpened;
 
 /**
  * Stores the entries in the menu if it's open.

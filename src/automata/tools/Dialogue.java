@@ -1,9 +1,9 @@
 package com.sqweebloid.jane.automata.tools;
 
-import net.***REMOVED***.api.widgets.Widget;
-import net.***REMOVED***.api.widgets.WidgetID;
-import net.***REMOVED***.api.widgets.WidgetInfo;
-import net.***REMOVED***.client.util.Text;
+import org.someclient.api.widgets.Widget;
+import org.someclient.api.widgets.WidgetID;
+import org.someclient.api.widgets.WidgetInfo;
+import org.someclient.client.util.Text;
 
 import com.sqweebloid.jane.automata.Automaton;
 

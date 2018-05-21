@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.inject.Inject;
-import net.***REMOVED***.api.GameObject;
-import net.***REMOVED***.api.Point;
-import net.***REMOVED***.api.coords.WorldPoint;
-import net.***REMOVED***.api.queries.GameObjectQuery;
-import net.***REMOVED***.client.util.QueryRunner;
+import org.someclient.api.GameObject;
+import org.someclient.api.Point;
+import org.someclient.api.coords.WorldPoint;
+import org.someclient.api.queries.GameObjectQuery;
+import org.someclient.client.util.QueryRunner;
 
 public class ObjectEntity extends Entity {
     private int[] targets = new int[0];

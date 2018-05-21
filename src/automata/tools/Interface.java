@@ -6,12 +6,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import javax.inject.Inject;
-import net.***REMOVED***.api.Item;
-import net.***REMOVED***.api.SpriteID;
-import net.***REMOVED***.api.widgets.Widget;
-import net.***REMOVED***.api.widgets.WidgetID;
-import net.***REMOVED***.api.widgets.WidgetInfo;
-import net.***REMOVED***.api.widgets.WidgetItem;
+import org.someclient.api.Item;
+import org.someclient.api.SpriteID;
+import org.someclient.api.widgets.Widget;
+import org.someclient.api.widgets.WidgetID;
+import org.someclient.api.widgets.WidgetInfo;
+import org.someclient.api.widgets.WidgetItem;
 
 import com.sqweebloid.jane.automata.Automaton;
 

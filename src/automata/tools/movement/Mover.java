@@ -3,10 +3,10 @@ package com.sqweebloid.jane.automata.tools.movement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
-import net.***REMOVED***.api.Point;
-import net.***REMOVED***.api.coords.WorldPoint;
-import net.***REMOVED***.api.coords.LocalPoint;
-import net.***REMOVED***.api.Perspective;
+import org.someclient.api.Point;
+import org.someclient.api.coords.WorldPoint;
+import org.someclient.api.coords.LocalPoint;
+import org.someclient.api.Perspective;
 
 import com.sqweebloid.jane.automata.Automaton;
 

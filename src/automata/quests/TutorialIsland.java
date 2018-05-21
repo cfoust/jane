@@ -1,10 +1,10 @@
 package com.sqweebloid.jane.automata.quests;
 
 import java.awt.Rectangle;
-import net.***REMOVED***.api.coords.WorldPoint;
-import net.***REMOVED***.api.widgets.Widget;
-import net.***REMOVED***.api.ItemID;
-import static net.***REMOVED***.api.widgets.WidgetInfo.TO_GROUP;
+import org.someclient.api.coords.WorldPoint;
+import org.someclient.api.widgets.Widget;
+import org.someclient.api.ItemID;
+import static org.someclient.api.widgets.WidgetInfo.TO_GROUP;
 
 import com.sqweebloid.jane.automata.Automaton;
 

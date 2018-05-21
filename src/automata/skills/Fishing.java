@@ -5,12 +5,12 @@ import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.util.List;
 import javax.inject.Inject;
-import net.***REMOVED***.api.Item;
-import net.***REMOVED***.api.NPC;
-import net.***REMOVED***.api.coords.WorldPoint;
+import org.someclient.api.Item;
+import org.someclient.api.NPC;
+import org.someclient.api.coords.WorldPoint;
 import com.sqweebloid.jane.Constants;
 
-import net.***REMOVED***.client.plugins.jane.JanePlugin;
+import org.someclient.client.plugins.jane.JanePlugin;
 import com.sqweebloid.jane.automata.Automaton;
 import com.sqweebloid.jane.controls.Input;
 

@@ -1,6 +1,6 @@
 package com.sqweebloid.jane.automata.tools.builders;
 
-import net.***REMOVED***.api.Point;
+import org.someclient.api.Point;
 
 import com.sqweebloid.jane.automata.tools.Entity;
 

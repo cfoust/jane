@@ -5,10 +5,10 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
 import javax.inject.Inject;
-import net.***REMOVED***.api.Point;
-import net.***REMOVED***.client.ui.overlay.Overlay;
-import net.***REMOVED***.client.ui.overlay.OverlayLayer;
-import net.***REMOVED***.client.ui.overlay.OverlayPosition;
+import org.someclient.api.Point;
+import org.someclient.client.ui.overlay.Overlay;
+import org.someclient.client.ui.overlay.OverlayLayer;
+import org.someclient.client.ui.overlay.OverlayPosition;
 
 import com.sqweebloid.jane.automata.tools.input.MouseState;
 

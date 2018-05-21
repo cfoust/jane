@@ -7,7 +7,7 @@ import java.util.Deque;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import javax.inject.Singleton;
-import net.***REMOVED***.api.events.WidgetHiddenChanged;
+import org.someclient.api.events.WidgetHiddenChanged;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

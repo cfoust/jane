@@ -6,20 +6,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.inject.Inject;
-import net.***REMOVED***.api.Client;
-import net.***REMOVED***.api.InventoryID;
-import net.***REMOVED***.api.Item;
-import net.***REMOVED***.api.ItemContainer;
-import net.***REMOVED***.api.Player;
-import net.***REMOVED***.api.Query;
-import net.***REMOVED***.api.queries.InventoryWidgetItemQuery;
-import net.***REMOVED***.api.queries.BankItemQuery;
-import net.***REMOVED***.api.queries.WidgetItemQuery;
-import net.***REMOVED***.api.widgets.Widget;
-import net.***REMOVED***.api.widgets.WidgetInfo;
-import net.***REMOVED***.api.widgets.WidgetItem;
-import net.***REMOVED***.client.plugins.jane.JanePlugin;
-import net.***REMOVED***.client.util.QueryRunner;
+import org.someclient.api.Client;
+import org.someclient.api.InventoryID;
+import org.someclient.api.Item;
+import org.someclient.api.ItemContainer;
+import org.someclient.api.Player;
+import org.someclient.api.Query;
+import org.someclient.api.queries.InventoryWidgetItemQuery;
+import org.someclient.api.queries.BankItemQuery;
+import org.someclient.api.queries.WidgetItemQuery;
+import org.someclient.api.widgets.Widget;
+import org.someclient.api.widgets.WidgetInfo;
+import org.someclient.api.widgets.WidgetItem;
+import org.someclient.client.plugins.jane.JanePlugin;
+import org.someclient.client.util.QueryRunner;
 
 /**
  * Performs everything related to inventory management.

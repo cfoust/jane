@@ -1,6 +1,6 @@
 package com.sqweebloid.jane.automata.tools.builders;
 
-import net.***REMOVED***.api.coords.WorldPoint;
+import org.someclient.api.coords.WorldPoint;
 
 import com.sqweebloid.jane.automata.tools.movement.Mover;
 import com.sqweebloid.jane.automata.tools.movement.MoveGraph;

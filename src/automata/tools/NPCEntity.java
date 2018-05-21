@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.inject.Inject;
-import net.***REMOVED***.api.NPC;
-import net.***REMOVED***.api.coords.WorldPoint;
-import net.***REMOVED***.api.queries.NPCQuery;
-import net.***REMOVED***.client.util.QueryRunner;
+import org.someclient.api.NPC;
+import org.someclient.api.coords.WorldPoint;
+import org.someclient.api.queries.NPCQuery;
+import org.someclient.client.util.QueryRunner;
 
 public class NPCEntity extends Entity {
     private int[] targets = new int[0];

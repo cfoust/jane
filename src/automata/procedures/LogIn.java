@@ -2,7 +2,7 @@ package com.sqweebloid.jane.automata.procedures;
 
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
-import net.***REMOVED***.api.GameState;
+import org.someclient.api.GameState;
 
 import com.sqweebloid.jane.automata.Automaton;
 

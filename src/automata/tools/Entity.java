@@ -8,9 +8,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.inject.Inject;
-import net.***REMOVED***.api.MenuEntry;
-import net.***REMOVED***.api.coords.WorldPoint;
-import net.***REMOVED***.client.util.QueryRunner;
+import org.someclient.api.MenuEntry;
+import org.someclient.api.coords.WorldPoint;
+import org.someclient.client.util.QueryRunner;
 
 import com.sqweebloid.jane.automata.Automaton;
 

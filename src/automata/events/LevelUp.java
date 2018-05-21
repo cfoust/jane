@@ -2,17 +2,17 @@ package com.sqweebloid.jane.automata.events;
 
 import java.awt.Rectangle;
 import javax.inject.Inject;
-import net.***REMOVED***.api.Client;
-import net.***REMOVED***.api.widgets.Widget;
-import net.***REMOVED***.api.widgets.WidgetInfo;
-import net.***REMOVED***.api.widgets.WidgetItem;
-import static net.***REMOVED***.api.widgets.WidgetID.LEVEL_UP_GROUP_ID;
-import static net.***REMOVED***.api.widgets.WidgetID.DIALOG_SPRITE_GROUP_ID;
-import static net.***REMOVED***.api.widgets.WidgetInfo.TO_GROUP;
+import org.someclient.api.Client;
+import org.someclient.api.widgets.Widget;
+import org.someclient.api.widgets.WidgetInfo;
+import org.someclient.api.widgets.WidgetItem;
+import static org.someclient.api.widgets.WidgetID.LEVEL_UP_GROUP_ID;
+import static org.someclient.api.widgets.WidgetID.DIALOG_SPRITE_GROUP_ID;
+import static org.someclient.api.widgets.WidgetInfo.TO_GROUP;
 
 import com.sqweebloid.jane.automata.Automaton;
 import com.sqweebloid.jane.controls.Input;
-import net.***REMOVED***.client.plugins.jane.JanePlugin;
+import org.someclient.client.plugins.jane.JanePlugin;
 
 /**
  * Clicks on the level up dialog until it goes away.

@@ -5,8 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import lombok.Value;
-import net.***REMOVED***.api.Item;
-import net.***REMOVED***.api.coords.WorldPoint;
+import org.someclient.api.Item;
+import org.someclient.api.coords.WorldPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

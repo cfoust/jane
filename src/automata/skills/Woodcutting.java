@@ -5,12 +5,12 @@ import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.util.List;
 import javax.inject.Inject;
-import net.***REMOVED***.api.Item;
-import net.***REMOVED***.api.ItemID;
-import net.***REMOVED***.api.NPC;
-import net.***REMOVED***.api.coords.WorldPoint;
-import net.***REMOVED***.api.queries.InventoryWidgetItemQuery;
-import net.***REMOVED***.api.widgets.WidgetItem;
+import org.someclient.api.Item;
+import org.someclient.api.ItemID;
+import org.someclient.api.NPC;
+import org.someclient.api.coords.WorldPoint;
+import org.someclient.api.queries.InventoryWidgetItemQuery;
+import org.someclient.api.widgets.WidgetItem;
 
 import com.sqweebloid.jane.Constants;
 import com.sqweebloid.jane.automata.Automaton;

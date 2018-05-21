@@ -6,11 +6,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.ThreadLocalRandom;
 import javax.inject.Inject;
-import net.***REMOVED***.api.Client;
-import net.***REMOVED***.api.Player;
-import net.***REMOVED***.api.Point;
-import net.***REMOVED***.api.coords.LocalPoint;
-import net.***REMOVED***.api.coords.WorldPoint;
+import org.someclient.api.Client;
+import org.someclient.api.Player;
+import org.someclient.api.Point;
+import org.someclient.api.coords.LocalPoint;
+import org.someclient.api.coords.WorldPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +21,7 @@ import com.sqweebloid.jane.automata.tools.builders.*;
 import com.sqweebloid.jane.automata.tools.input.*;
 import com.sqweebloid.jane.automata.tools.movement.*;
 import com.sqweebloid.jane.controls.*;
-import net.***REMOVED***.client.plugins.jane.JanePlugin;
+import org.someclient.client.plugins.jane.JanePlugin;
 
 /**
  * Plans and performs a particular action in its own thread.
