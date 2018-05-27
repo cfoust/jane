@@ -24,7 +24,10 @@ least, `jane` pushed down commmodity prices for a little while.
 
 The code in the `old/` directory is from my original attempts to write hooks
 for OSRS back in 2013. Some of them still work, but it's mostly there as an
-  example for others to learn from.
+example for others to learn from. You'll find that the code is pretty
+terrible even if it work(s/ed). Not only was I a far worse programmer back
+then, but I also just slop out code as necessary when I'm burning on a
+project not intended for public release.
 
 ## post-mortem
 
