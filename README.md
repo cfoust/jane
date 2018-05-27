@@ -1,6 +1,6 @@
-# jane
-
 ![example](assets/example.gif)
+
+# jane
 
 > Gather resources. Level up. Do quests.
 
@@ -19,6 +19,12 @@ I ran `jane` on half a dozen accounts, only one of which got banned. For what
 it's worth, I didn't have any malicious intention with running these bots, I
 just thought it was a cool side project to get into robotics. At the very
 least, `jane` pushed down commmodity prices for a little while.
+
+## the original
+
+The code in the `old/` directory is from my original attempts to write hooks
+for OSRS back in 2013. Some of them still work, but it's mostly there as an
+  example for others to learn from.
 
 ## post-mortem
 
